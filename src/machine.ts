@@ -1,4 +1,4 @@
-import IO from './io/IO'
+import IO from './io/io'
 
 class Machine {
 
