@@ -14,5 +14,9 @@
     "email": "niklas@shroudedcode.com",
     "url": "https://shroudedcode.com/"
   },
-  "license": "GPL-3.0"
+  "license": "GPL-3.0",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^8.0.19"
+  }
 }
