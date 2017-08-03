@@ -1,4 +1,4 @@
-interface IO {
+export interface IO {
 
   /**
    * Reads and returns the current weight on the scale.
@@ -8,5 +8,3 @@ interface IO {
   readScale(): number
 
 }
-
-export default IO
