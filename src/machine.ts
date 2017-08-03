@@ -1,11 +1,15 @@
-import IO from './io/io'
+import { IO } from './io/io'
 
-class Machine {
+import { Job } from './models/job'
+import { MixingJob } from './models/mixing-job'
+import { Drink } from './models/drink'
 
-  io: IO
+export class Machine {
+
+  currentJob: Job
 
   constructor(io: IO) {
-    this.io = io
+    global.io = io
   }
 
 }
