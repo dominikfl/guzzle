@@ -12,6 +12,16 @@ export class Machine {
     global.io = io
   }
 
+  /** Start a new DrinkJob with the given drink. */
+  mix(drink: Drink) {
+    this.currentJob = new MixingJob(drink)
+  }
+
+  /** Whether this machine is currently working on a job. */
+  isWorking(): boolean {
+    return this.currentJob != null
+  }
+
 }
 
 export default Machine
