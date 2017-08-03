@@ -10,6 +10,7 @@ export class PouringStep implements MixingStep {
   /** The amount of liquid being poured by this step in grams. */
   amount: number
 
+  /** The amount of liquid that was already poured. */
   pouredAmount = 0
 
   constructor(liquid: Liquid, amount: number) {}
