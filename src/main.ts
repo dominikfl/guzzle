@@ -1,10 +1,11 @@
 import { app, BrowserWindow } from 'electron'
 import path = require('path')
 
+import { Machine } from './machine'
 import { TestIO } from './io/test-io'
 let win
 
-global.io = new TestIO()
+const machine = new Machine(new TestIO())
 
 app.on('ready', () => {
   win = new BrowserWindow({
