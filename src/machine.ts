@@ -6,10 +6,10 @@ import { Drink } from './models/drink'
 
 export class Machine {
 
+  io: IO
   currentJob: Job
 
   constructor(io: IO) {
-    global.io = io
   }
 
   /** Start a new DrinkJob with the given drink. */

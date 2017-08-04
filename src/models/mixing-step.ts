@@ -6,6 +6,6 @@ export interface MixingStep {
   getDescription(): string
 
   /** Executes the mixing step and returns whether it's done. */
-  execute(): boolean
+  execute(io: IO): boolean
 
 }
