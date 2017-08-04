@@ -10,6 +10,11 @@ export class Machine {
   currentJob: Job
 
   constructor(io: IO) {
+    setInterval(250, this.tick())
+  }
+
+  tick() {
+    if(this.isWorking()) this.currentJob.tick(this.io)
   }
 
   /** Start a new DrinkJob with the given drink. */
