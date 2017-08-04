@@ -4,6 +4,7 @@
   "description": "An open-source beverage mixing machine.",
   "main": "src/main.ts",
   "scripts": {
+    "build": "gulp",
     "start": "electron dist/main.js",
     "test": "ts-mocha test/**/*.ts"
   },
