@@ -3,6 +3,7 @@ import { IO } from './io/io'
 import { Job } from './models/job'
 import { MixingJob } from './models/mixing-job'
 import { Drink } from './models/drink'
+import { Liquid } from './models/liquid'
 
 export default class Machine {
 
@@ -11,6 +12,9 @@ export default class Machine {
 
   /** The job the machine is currently working on. */
   currentJob: Job
+
+  /** The valves associated with certain liquids. */
+  valves: { [key: string]: number }
 
   constructor(io: IO) {
     setInterval(this.tick.bind(this), 250)
