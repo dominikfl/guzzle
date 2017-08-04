@@ -1,6 +1,7 @@
 import { Job } from './job'
 import { MixingStep } from './mixing-step'
 import { Drink } from './drink'
+import { IO } from '../io/io'
 
 /** The job implementation that handles mixing drinks. */
 export class MixingJob implements Job {
@@ -20,7 +21,7 @@ export class MixingJob implements Job {
     return this.steps[0]
   }
 
-  tick(io) {
+  tick(io: IO) {
     if(this.getCurrentStep().execute(io)) this.steps.shift()
   }
 

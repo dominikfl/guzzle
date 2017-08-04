@@ -21,7 +21,7 @@ export class PouringStep implements MixingStep {
     this.currentWeight = startWeight
   }
 
-  execute(io) {
+  execute(io: IO) {
     this.currentWeight = io.readScale()
     return false
   }
