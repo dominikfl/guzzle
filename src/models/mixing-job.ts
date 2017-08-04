@@ -21,13 +21,14 @@ export class MixingJob implements Job {
   }
 
   tick(io) {
-    if(this.getCurrentStep().execute()) this.steps.shift()
+    if(this.getCurrentStep().execute(io)) this.steps.shift()
   }
 
   getProgress() {
     const totalSteps = this.drink.steps.length
     const doneSteps = totalSteps - this.steps.length
-    return doneSteps / totalSteps
+    const currentStepProgress = this.getCurrentStep().getProgress()
+    return doneSteps / totalSteps + (currentStepProgress / totalSteps)
   }
 
   getTitle() {
