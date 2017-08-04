@@ -26,6 +26,7 @@ export class PouringStep implements MixingStep {
     return false
   }
 
+  /** The needed weight based on the amount and the density of the liquid. */
   getNeededWeight() {
     return this.amount * this.liquid.density
   }

@@ -6,7 +6,10 @@ import { Drink } from './models/drink'
 
 export default class Machine {
 
+  /** The IO implementation the machine is using. */
   io: IO
+
+  /** The job the machine is currently working on. */
   currentJob: Job
 
   constructor(io: IO) {
