@@ -10,7 +10,7 @@ export default class Machine {
   currentJob: Job
 
   constructor(io: IO) {
-    setInterval(this.tick, 250)
+    setInterval(this.tick.bind(this), 250)
   }
 
   tick() {
