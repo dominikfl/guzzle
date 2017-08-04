@@ -8,7 +8,7 @@ export interface Job {
   /** The current progress of the job, a number between 0 and 1. */
   getProgress(): number
 
-  /** The title of the job. **/
+  /** The title of the job. */
   getTitle(): string
 
   /** A description of what the job is currently doing. */
