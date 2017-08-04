@@ -22,8 +22,8 @@ export class PouringStep implements MixingStep {
   }
 
   execute(io: IO) {
-    this.currentWeight = io.readScale()
-    return false
+    this.currentWeight = io.getScaleWeight()
+    return this.currentWeight > this.getNeededWeight()
   }
 
   /** The needed weight based on the amount and the density of the liquid. */
