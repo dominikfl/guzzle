@@ -4,7 +4,7 @@ import { Job } from './models/job'
 import { MixingJob } from './models/mixing-job'
 import { Drink } from './models/drink'
 
-export class Machine {
+export default class Machine {
 
   io: IO
   currentJob: Job
@@ -28,5 +28,3 @@ export class Machine {
   }
 
 }
-
-export default Machine

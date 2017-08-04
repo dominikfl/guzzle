@@ -1,7 +1,7 @@
 import { app, BrowserWindow } from 'electron'
 import path = require('path')
 
-import { Machine } from './machine'
+import Machine from './machine'
 import { TestIO } from './io/test-io'
 let win
 
