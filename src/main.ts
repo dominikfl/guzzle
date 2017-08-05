@@ -9,8 +9,8 @@ const machine = new Machine(new TestIO())
 
 app.on('ready', () => {
   win = new BrowserWindow({
-    width: 800,
-    height: 480,
+    width: 480,
+    height: 800,
     resizable: false,
     show: false,
     backgroundColor: '#fff'
@@ -19,6 +19,7 @@ app.on('ready', () => {
   win.once('ready-to-show', () => win.show())
   win.setMenu(null)
   win.loadURL(path.join('file://', __dirname, 'ui/index.html'))
+  win.openDevTools({ detach: true })
 
   win.on('closed', () => {
     win = null

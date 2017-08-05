@@ -1,3 +1,20 @@
+@import "https://cdn.materialdesignicons.com/1.9.32/css/materialdesignicons.min.css";
+@import "https://fonts.googleapis.com/css?family=Cuprum";
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  background: red;
+  font-family: Cuprum;
+  background: #19DD80;
+
+  height: 100vh;
+
+  margin: 0;
+  padding: 25px;
+}
+
+#app {
+  height: 100%;
 }
