@@ -23,9 +23,10 @@ html
           include icons/navigation-exit.svg
       .view-container
         .view(:class='{ hidden: view !== "home" }')
-          p Home view
-        .view(:class='{ hidden: view !== "drink" }')
-          p(v-for='drink in drinks') {{ drink.name }}
+          button(
+            v-for='drink, drinkId in drinks',
+            @click='currentDrinkId = drinkId; view = "drink"'
+          ) {{ drink.name }}
         .view(:class='{ hidden: view !== "drink" }')
           .drink
             img(:src='`/home/niklas/.juicy/images/drinks/${currentDrink.name.toLowerCase().replace(" ", "-")}.png`').drink-image
