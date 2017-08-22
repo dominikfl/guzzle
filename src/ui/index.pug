@@ -26,5 +26,9 @@ html
           p Home view
         .view(:class='{ hidden: view !== "drink" }')
           p(v-for='drink in drinks') {{ drink.name }}
+        .view(:class='{ hidden: view !== "drink" }')
+          .drink
+            .drink-name(:styles='{ color: currentDrink.color }') {{ currentDrink.name }}
+            .drink-description {{ currentDrink.description }}
     script var exports = {};
     script(src='app.js')
