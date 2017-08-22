@@ -17,11 +17,13 @@ export class PouringStep implements MixingStep {
   /** The current weight of the entire drink. */
   currentWeight: number
 
-  constructor(liquid: Liquid, amount: number, startWeight: number) {
-    this.currentWeight = startWeight
+  constructor(liquid: Liquid, amount: number) {
+    this.liquid = liquid
+    this.amount = amount
   }
 
   execute(io: IO) {
+    if(!('startWeight' in this)) this.startWeight = io.getScaleWeight()
     this.currentWeight = io.getScaleWeight()
     return this.currentWeight > this.getNeededWeight()
   }
