@@ -28,6 +28,8 @@ html
           p(v-for='drink in drinks') {{ drink.name }}
         .view(:class='{ hidden: view !== "drink" }')
           .drink
+            img(:src='`/home/niklas/.juicy/images/drinks/${currentDrink.name.toLowerCase().replace(" ", "-")}.png`').drink-image
+            .drink-image-shadow
             .drink-name(:styles='{ color: currentDrink.color }') {{ currentDrink.name }}
             .drink-description {{ currentDrink.description }}
     script var exports = {};

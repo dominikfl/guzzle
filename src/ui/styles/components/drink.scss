@@ -1,6 +1,23 @@
 .drink {
   text-align: center;
 
+  &-image {
+    z-index: 1;
+    position: relative;
+
+    &-shadow {
+      width: 150px;
+      height: 20px;
+      background: rgba(black, .3);
+      filter: blur(15px);
+      border-radius: 50%;
+      margin: auto;
+      margin-top: -26px;
+      margin-bottom: 50px;
+      z-index: 0;
+    }
+  }
+
   &-name {
     color: var(--theme-color);
     font-size: 34px;
