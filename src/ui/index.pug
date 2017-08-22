@@ -13,5 +13,10 @@ html
         .navigation-button
           .navigation-button-shape
           include icons/navigation-exit.svg
+      .view-container
+        .view(:class='{ hidden: view !== "home" }')
+          p Home view
+        .view(:class='{ hidden: view !== "drink" }')
+          p(v-for='drink in drinks') {{ drink.name }}
     script var exports = {};
     script(src='app.js')
