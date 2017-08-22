@@ -1,13 +1,16 @@
 import * as Vue from 'vue/dist/vue.common'
 import os = require('os')
 import path = require('path')
+
 import { ConfigLoader } from '../config/config-loader'
+import { Drink } from '../models/drink'
 
 const app = new Vue({
   el: '#app',
   data: {
     view: 'drink',
-    drinks: []
+    drinks: [new Drink('Placeholder', 'If you see this drink, something went wrong.', '#FF1744', [])],
+    currentDrinkId: 0
   },
   computed: {
     backButtonHidden() {
@@ -17,8 +20,11 @@ const app = new Vue({
       return this.view === 'home'
     },
     themeColor() {
-      if(this.view === 'drink') return '#F9C22C'
+      if(this.view === 'drink') return this.currentDrink.color
       return '#76c455'
+    },
+    currentDrink() {
+      return this.drinks[this.currentDrinkId]
     }
   },
   methods: {
