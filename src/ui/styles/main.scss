@@ -17,6 +17,10 @@
   text-rendering: optimizeLegibility;
 }
 
+img {
+  pointer-events: none;
+}
+
 body {
   font-family: "Merriweather Sans";
 
