@@ -4,7 +4,9 @@ html
     title Project Juicy
     link(rel='stylesheet', href='styles.css')
   body
-    #app
+    #app(
+        :style='{ "--theme-color": themeColor }'
+    )
       .navigation
         .navigation-button
           .navigation-button-shape
