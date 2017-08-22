@@ -1,4 +1,4 @@
-import Vue = require('vue/dist/vue.common')
+import * as Vue from 'vue/dist/vue.common'
 import os = require('os')
 import path = require('path')
 import { ConfigLoader } from '../config/config-loader'
