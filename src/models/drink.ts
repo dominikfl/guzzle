@@ -15,15 +15,4 @@ export class Drink {
   /** The steps required to mix this drink. */
   steps: Array<MixingStep>
 
-  /** Whether the drink is alcoholic. */
-  isAlcoholic(): boolean {
-    for(let step of this.steps) {
-      if(step instanceof PouringStep) {
-        const pouringStep = <PouringStep> step
-        if(pouringStep.liquid.alcoholic) return true
-      }
-    }
-    return false
-  }
-
 }

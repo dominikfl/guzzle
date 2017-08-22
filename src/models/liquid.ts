@@ -6,7 +6,4 @@ export class Liquid {
   /** The physical density of the liquid. */
   density: number
 
-  /** Whether the liquid is alcoholic. */
-  alcoholic: boolean
-
 }
