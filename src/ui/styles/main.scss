@@ -4,12 +4,12 @@
 @import "components/navigation";
 @import "components/navigation-button";
 
-* {
-  box-sizing: border-box;
-}
-
 :root {
   --theme-color: #F9C22C;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
