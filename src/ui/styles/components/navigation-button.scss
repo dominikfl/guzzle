@@ -35,6 +35,8 @@
   }
 
   &.hidden {
+    pointer-events: none;
+
     .navigation-button-shape {
       opacity: 0;
       transform: scale(.5);
