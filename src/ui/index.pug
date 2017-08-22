@@ -8,11 +8,17 @@ html
         :style='{ "--theme-color": themeColor }'
     )
       .navigation
-        .navigation-button
+        .navigation-button(
+          :class='{ hidden: backButtonHidden }',
+          @mouseup='goBack()'
+        )
           .navigation-button-shape
           include icons/navigation-back.svg
         .navigation-filler
-        .navigation-button
+        .navigation-button(
+          :class='{ hidden: exitButtonHidden }',
+          @mouseup='exit()'
+        )
           .navigation-button-shape
           include icons/navigation-exit.svg
       .view-container
