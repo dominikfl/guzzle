@@ -1,0 +1,15 @@
+.rounded-button {
+  height: 50px;
+  border-radius: 25px;
+  display: flex;
+  float: right;
+
+  &-label {
+    font-weight: bold;
+    font-size: 20px;
+    color: var(--theme-color);
+    opacity: .5;
+    line-height: 50px;
+    padding: 0 18px;
+  }
+}

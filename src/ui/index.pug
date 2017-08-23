@@ -36,5 +36,11 @@ html
                 .drink-image-shadow
                 .drink-name(:styles='{ color: currentDrink.color }') {{ currentDrink.name }}
                 .drink-description {{ currentDrink.description }}
+            .fixed-bottom.drink-button-container
+              .rounded-button
+                .rounded-button-label Continue
+                .round-button
+                  .round-button-shape
+                  include icons/navigation-next.svg
     script var exports = {};
     script(src='app.js')
