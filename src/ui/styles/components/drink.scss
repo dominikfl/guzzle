@@ -1,5 +1,17 @@
 .drink {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  > .scroller {
+    flex-grow: 1;
+
+    > .scroller-content {
+      padding-top: 100px;
+      padding-bottom: 25px;
+    }
+  }
 
   &-image {
     z-index: 1;
@@ -27,6 +39,6 @@
     color: rgba(black, .4);
     font-family: Chivo;
     font-size: 16px;
-    padding: 0 60px;
+    padding: 0 80px;
   }
 }
