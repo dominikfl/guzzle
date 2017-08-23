@@ -5,10 +5,10 @@
 @import "components/navigation";
 @import "components/navigation-button";
 
-@import "components/view-container";
 @import "components/view";
 
 @import "components/drink";
+@import "utilities/layout";
 
 * {
   box-sizing: border-box;

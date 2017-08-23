@@ -1,0 +1,18 @@
+.fixed-top, .fixed-bottom, .fixed-fill {
+  position: fixed;
+  left: 0;
+  right: 0;
+}
+
+.fixed-fill {
+  top: 0;
+  bottom: 0;
+}
+
+.fixed-top {
+  top: 0;
+}
+
+.fixed-bottom {
+  bottom: 0;
+}

@@ -7,7 +7,7 @@ html
     #app(
         :style='{ "--theme-color": themeColor }'
     )
-      .navigation
+      .navigation.fixed-top
         .navigation-button(
           :class='{ hidden: backButtonHidden }',
           @mouseup='goBack()'
@@ -21,7 +21,7 @@ html
         )
           .navigation-button-shape
           include icons/navigation-exit.svg
-      .view-container
+      .view-container.fixed-fill
         .view(:class='{ hidden: view !== "home" }')
           button(
             v-for='drink, drinkId in drinks',
