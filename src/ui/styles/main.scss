@@ -2,13 +2,14 @@
 @import "https://fonts.googleapis.com/css?family=Merriweather+Sans";
 @import "https://fonts.googleapis.com/css?family=Chivo";
 
+/* Components */
 @import "components/navigation";
 @import "components/navigation-button";
-
 @import "components/view";
-
 @import "components/drink";
 @import "components/scroller";
+
+/* Utilities */
 @import "utilities/layout";
 
 * {
