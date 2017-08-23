@@ -8,18 +8,18 @@ html
         :style='{ "--theme-color": themeColor }'
     )
       .navigation.fixed-top
-        .navigation-button(
+        .round-button(
           :class='{ hidden: backButtonHidden }',
           @mouseup='goBack()'
         )
-          .navigation-button-shape
+          .round-button-shape
           include icons/navigation-back.svg
         .navigation-filler
-        .navigation-button(
+        .round-button(
           :class='{ hidden: exitButtonHidden }',
           @mouseup='exit()'
         )
-          .navigation-button-shape
+          .round-button-shape
           include icons/navigation-exit.svg
       .view-container.fixed-fill
         .view(:class='{ hidden: view !== "home" }')
