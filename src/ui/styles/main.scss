@@ -8,10 +8,14 @@
 @import "components/rounded-button";
 @import "components/view";
 @import "components/drink";
+@import "components/drink-card";
 @import "components/scroller";
 
 /* Utilities */
 @import "utilities/layout";
+
+/* Views */
+@import "views/home";
 
 * {
   box-sizing: border-box;
@@ -33,4 +37,5 @@ body {
 
 #app {
   height: 100%;
+  transition: .2s ease;
 }

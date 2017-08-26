@@ -5,9 +5,9 @@ html
     link(rel='stylesheet', href='styles.css')
   body
     #app(
-        :style='{ "--theme-color": themeColor }'
+        :style='{ "--theme-color": themeColor, background: view == "home" ? "#FBFBFB" : "white" }'
     )
-      .navigation.fixed-top
+      .navigation.fixed-top(:class="{ disabled: backButtonHidden && exitButtonHidden }")
         .round-button(
           :class='{ hidden: backButtonHidden }',
           @mouseup='goBack()'
@@ -22,11 +22,17 @@ html
           .round-button-shape
           include icons/navigation-exit.svg
       .view-container.fixed-fill
-        .view(:class='{ hidden: view !== "home" }')
-          button(
-            v-for='drink, drinkId in drinks',
-            @click='currentDrinkId = drinkId; view = "drink"'
-          ) {{ drink.name }}
+        .view.home-view(:class='{ hidden: view !== "home" }')
+          .scroller
+            .scroller-content
+              .drink-card(
+                v-for='drink, drinkId in drinks',
+                @click='currentDrinkId = drinkId; view = "drink"'
+              )
+                .drink-card-stripe(:style='{ backgroundColor: drink.color }')
+                .drink-card-meta
+                  .drink-card-name {{ drink.name }}
+                  .drink-card-description {{ drink.description }}
         .view(:class='{ hidden: view !== "drink" }')
           .drink
             .scroller
