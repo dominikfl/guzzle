@@ -37,6 +37,6 @@ const app = new Vue({
   },
   mounted() {
     const configLoader = new ConfigLoader(path.join(os.homedir(), '.juicy'))
-    this.drinks = configLoader.loadDrinks()
+    configLoader.loadDrinks().then(drinks => this.drinks = drinks)
   }
 })
