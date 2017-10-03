@@ -9,7 +9,58 @@ import { PouringStep } from '../models/pouring-step'
 
 export class ConfigLoader {
 
-  constructor(private path: string) {}
+  constructor(private path: string) {
+    if(!fs.pathExistsSync(path)) {
+      this.generateExamples()
+    }
+  }
+
+  /** Generates default config files. */
+  async generateExamples() {
+    try {
+      fs.mkdirSync(this.path)
+
+      const liquidsPath = path.join(this.path, 'liquids')
+      fs.mkdirSync(liquidsPath)
+
+      const drinksPath = path.join(this.path, 'drinks')
+      fs.mkdirSync(drinksPath)
+
+      const water = {
+        name: 'Water',
+        density: 1
+      }
+      fs.writeFileSync(path.join(liquidsPath, 'water.yml'), yaml.dump(water))
+
+      const deluxeWater = {
+        name: 'Deluxe Water',
+        description: "Deluxe water, for the cool kids.",
+        color: '#42A5F5',
+        steps: [{
+          type: 'pour',
+          liquid: 'water',
+          amount: 300
+        }]
+      }
+      fs.writeFileSync(path.join(drinksPath, 'deluxe-water.yml'), yaml.dump(deluxeWater))
+
+      const boringWater = {
+        name: 'Boring Water',
+        description: "I'm so boring, everyone will laugh at you for buying me.",
+        color: '#63aae3',
+        steps: [{
+          type: 'pour',
+          liquid: 'water',
+          amount: 299
+        }]
+      }
+      fs.writeFileSync(path.join(drinksPath, 'boring-water.yml'), yaml.dump(boringWater))
+
+      console.log('Default configuration files were successfully generated!')
+    } catch(error) {
+      console.log('There was an error generating the default configuration files.', error)
+    }
+  }
 
   /** Asynchronously loads the drinks from the `/drinks` directory. */
   async loadDrinks(): Promise<Array<Drink>> {
