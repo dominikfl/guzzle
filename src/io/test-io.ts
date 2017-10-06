@@ -17,4 +17,8 @@ export class TestIO implements IO {
     return this.openedValves.has(id)
   }
 
+  setLedColor(red: number, green: number, blue: number) {
+    console.log(`Set status LED color to (${red}, ${green}, ${blue}).`)
+  }
+
 }
