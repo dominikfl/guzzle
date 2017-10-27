@@ -26,7 +26,10 @@ export class MachineIO implements IO {
     await gpio.setup(led.greenPin)
     await gpio.setup(led.bluePin)
 
-    // TODO: Set the HX711 sensor up
+    // Set the HX711 sensor up
+    const scale = this.config.scale
+    await gpio.setup(scale.clockPin)
+    await gpio.setup(scale.dataPin, rpiGpio.DIR_IN)
   }
 
   async getScaleWeight() {
