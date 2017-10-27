@@ -22,9 +22,9 @@ export class MachineIO implements IO {
 
     // Set the LED pins up
     const led = this.config.led
-    await gpio.setup(led.redPin, null)
-    await gpio.setup(led.greenPin, null)
-    await gpio.setup(led.bluePin, null)
+    await gpio.setup(led.redPin)
+    await gpio.setup(led.greenPin)
+    await gpio.setup(led.bluePin)
 
     // TODO: Set the HX711 sensor up
   }
