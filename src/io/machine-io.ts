@@ -37,6 +37,27 @@ export class MachineIO implements IO {
     return 0
   }
 
+  /** Shifts in a byte of data one bit at a time. */
+  async shiftIn(dataPin: number, clockPin: number, order: number) {
+    let value = 0
+
+    if(order == 0) {
+      for(let i = 7; i >= 0; --i) {
+        gpio.write(clockPin, rpiGpio.DIR_HIGH)
+        value |= await gpio.read(dataPin) << i
+        gpio.write(clockPin, rpiGpio.DIR_LOW)
+      }
+    } else {
+      for (let i = 0; i < 8; ++i) {
+        gpio.write(clockPin, rpiGpio.DIR_HIGH)
+        value |= await gpio.read(dataPin) << i
+        gpio.write(clockPin, rpiGpio.DIR_LOW)
+      }
+    }
+
+    return value
+  }
+
   async setValveOpened(id: number, opened: boolean) {
     // TODO: Write to the valve's pin
     return
