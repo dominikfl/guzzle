@@ -25,7 +25,7 @@ function openMainWindow() {
 
   mainWin.once('ready-to-show', () => mainWin.show())
   mainWin.setMenu(null)
-  mainWin.loadURL(path.join('file://', __dirname, 'ui/index.html'))
+  mainWin.loadURL(path.join('file://', __dirname, 'ui/main.html'))
   mainWin.openDevTools({ detach: true })
 
   mainWin.on('closed', () => {
