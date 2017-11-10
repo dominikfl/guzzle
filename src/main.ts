@@ -3,12 +3,19 @@ import path = require('path')
 
 import Machine from './machine'
 import { TestIO } from './io/test-io'
-let win: any
+
+let mainWin: any
+let testWin: any
 
 const machine = new Machine(new TestIO())
 
 app.on('ready', () => {
-  win = new BrowserWindow({
+  openMainWindow()
+  openTestingWindow()
+})
+
+function openMainWindow() {
+  mainWin = new BrowserWindow({
     width: 480,
     height: 800,
     resizable: false,
@@ -16,12 +23,31 @@ app.on('ready', () => {
     backgroundColor: '#fff'
   })
 
-  win.once('ready-to-show', () => win.show())
-  win.setMenu(null)
-  win.loadURL(path.join('file://', __dirname, 'ui/index.html'))
-  win.openDevTools({ detach: true })
+  mainWin.once('ready-to-show', () => mainWin.show())
+  mainWin.setMenu(null)
+  mainWin.loadURL(path.join('file://', __dirname, 'ui/index.html'))
+  mainWin.openDevTools({ detach: true })
 
-  win.on('closed', () => {
-    win = null
+  mainWin.on('closed', () => {
+    app.quit()
   })
-})
+}
+
+function openTestingWindow() {
+  testWin = new BrowserWindow({
+    width: 300,
+    height: 500,
+    resizable: false,
+    show: false,
+    backgroundColor: '#fff'
+  })
+
+  testWin.once('ready-to-show', () => testWin.show())
+  testWin.setMenu(null)
+  testWin.loadURL(path.join('file://', __dirname, 'ui/testing.html'))
+  testWin.openDevTools({ detach: true })
+
+  testWin.on('closed', () => {
+    testWin = null
+  })
+}
