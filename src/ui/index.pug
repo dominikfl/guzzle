@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title Project Juicy
+    title Guzzle
     link(rel='stylesheet', href='styles.css')
   body
     #app(
@@ -38,7 +38,7 @@ html
             .scroller
               .scroller-overlay
               .scroller-content
-                img(:src='`/home/niklas/.juicy/images/drinks/${currentDrink.name.toLowerCase().replace(" ", "-")}.png`').drink-image
+                img(:src='`/home/niklas/.guzzle/images/drinks/${currentDrink.name.toLowerCase().replace(" ", "-")}.png`').drink-image
                 .drink-image-shadow
                 .drink-name(:style='{ color: currentDrink.color }') {{ currentDrink.name }}
                 .drink-description {{ currentDrink.description }}

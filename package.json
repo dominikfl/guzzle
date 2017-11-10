@@ -1,5 +1,5 @@
 {
-  "name": "project-juicy",
+  "name": "guzzle",
   "version": "1.0.0",
   "description": "An open-source beverage mixing machine.",
   "main": "src/main.ts",
