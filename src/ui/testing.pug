@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    title Guzzle · Testing Utility
+    link(rel='stylesheet', href='styles.css')
+  body
+    #app.testing-window
+      .options
+        .option
+          span.option-icon.mdi.mdi-scale
+          span.option-label Scale
+          .scale-control.option-control
+            input.scale-control-value(type='number', min=0, v-model.number='inputs.scaleValue')
+            .scale-control-unit g
+        .option(v-for='(valve, valveId) in outputs.valves')
+          span.option-icon.mdi.mdi-water
+          span.option-label Valve {{ valveId }}
+          .valve-control.option-control(:class='{ "valve-control-open": valve.open }') {{ valve.open ? 'Open' : 'Closed' }}
+      span.open-devtools(@click='openDevTools()') Open DevTools
+    script var exports = {};
+    script(src='testing.js')

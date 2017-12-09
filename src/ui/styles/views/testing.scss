@@ -1,0 +1,114 @@
+.testing-window {
+  $color-border: #909090;
+  $color-background: #F5F5F5;
+  $color-input: #FFFFFF;
+  $color-text: #465A5B;
+  $color-icon: #949494;
+
+  $color-off: #e05656;
+  $color-off-border: #b52525;
+  $color-on: #62ce67;
+  $color-on-border: #17ab1d;
+
+  background: $color-background;
+  padding: 15px;
+  overflow-y: auto;
+
+  .options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    grid-gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .option {
+    background: #FFF;
+    text-align: center;
+    box-shadow: 0 1px 1px rgba($color-icon, .3);
+    border: 1px solid $color-border;
+    border-radius: 3px;
+    overflow: hidden;
+    padding: 10px;
+
+    &-icon {
+      color: $color-icon;
+      font-size: 48px;
+      line-height: 50px;
+    }
+
+    &-label {
+      color: #fff;
+      background: $color-icon;
+      font-size: 13px;
+      padding: 1px 3px;
+      border-radius: 2px;
+    }
+
+    &-control {
+      margin-top: 15px;
+      font-size: 12px;
+      border: 1px solid $color-border;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+  }
+
+  .scale-control {
+    display: flex;
+
+    &-value {
+      display: block;
+      border: none;
+      width: 0;
+      flex-grow: 1;
+      background: $color-input;
+      padding: 4px 6px;
+      font-size: inherit;
+      color: $color-text;
+
+      &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+
+    &-unit {
+      color: $color-text;
+      background: $color-background;
+      padding: 0 6px;
+      line-height: 19px;
+      border-left: 1px solid $color-border;
+    }
+  }
+
+  .valve-control {
+    padding: 4px;
+    color: #fff;
+    background: $color-off;
+    border-color: $color-off-border;
+
+    &-open {
+      background: $color-on;
+      border-color: $color-on-border;
+    }
+  }
+
+  .open-devtools {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+    color: $color-text;
+    border-bottom: 1px solid rgba($color-text, .5);
+
+    transition: all .2s ease-in-out;
+
+    &:not(:hover) {
+      opacity: .7;
+      border-bottom-color: rgba($color-text, .2);
+    }
+
+    &:active {
+      opacity: .8;
+    }
+  }
+}
