@@ -16,12 +16,14 @@
 
 /* Views */
 @import "views/home";
+@import "views/testing";
 
 * {
   box-sizing: border-box;
   user-select: none;
   cursor: default;
   text-rendering: optimizeLegibility;
+  outline: none;
 }
 
 img {

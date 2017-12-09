@@ -1,53 +1,16 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 import path = require('path')
 
 import Machine from './machine'
 import { TestIO } from './io/test-io'
 
-let mainWin: any
-let testWin: any
-
-const machine = new Machine(new TestIO())
+let machine
 
 app.on('ready', () => {
-  openMainWindow()
-  openTestingWindow()
+  machine = new Machine(new TestIO())
+
+  ipcMain.on('open-devtools', () => {
+    machine.window.openDevTools({ detach: true })
+    if(machine.io.window) machine.io.window.openDevTools({ detach: true })
+  })
 })
-
-function openMainWindow() {
-  mainWin = new BrowserWindow({
-    width: 480,
-    height: 800,
-    resizable: false,
-    show: false,
-    backgroundColor: '#fff'
-  })
-
-  mainWin.once('ready-to-show', () => mainWin.show())
-  mainWin.setMenu(null)
-  mainWin.loadURL(path.join('file://', __dirname, 'ui/main.html'))
-  mainWin.openDevTools({ detach: true })
-
-  mainWin.on('closed', () => {
-    app.quit()
-  })
-}
-
-function openTestingWindow() {
-  testWin = new BrowserWindow({
-    width: 300,
-    height: 500,
-    resizable: false,
-    show: false,
-    backgroundColor: '#fff'
-  })
-
-  testWin.once('ready-to-show', () => testWin.show())
-  testWin.setMenu(null)
-  testWin.loadURL(path.join('file://', __dirname, 'ui/testing.html'))
-  testWin.openDevTools({ detach: true })
-
-  testWin.on('closed', () => {
-    testWin = null
-  })
-}
