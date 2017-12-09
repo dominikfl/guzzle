@@ -1,32 +1,32 @@
 class LedConfig {
 
   /** The number of the red pin. */
-  redPin: number
+  public redPin: number
 
   /** The number of the green pin. */
-  greenPin: number
+  public greenPin: number
 
   /** The number of the blue pin. */
-  bluePin: number
+  public bluePin: number
 
 }
 
 class ScaleConfig {
 
   /** The number of the clock (SCK) pin. */
-  clockPin: number
+  public clockPin: number
 
   /** The number of the data (DT) pin. */
-  dataPin: number
+  public dataPin: number
 
 }
 
 export class MachineConfig {
 
   /** The configuration of the status LED. */
-  led: LedConfig
+  public led: LedConfig
 
   /** The configuration of the status LED. */
-  scale: ScaleConfig
+  public scale: ScaleConfig
 
 }

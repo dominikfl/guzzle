@@ -1,42 +1,42 @@
+import { IO } from '../io/io'
+import { Drink } from './drink'
 import { Job } from './job'
 import { MixingStep } from './mixing-step'
-import { Drink } from './drink'
-import { IO } from '../io/io'
 
 /** The job implementation that handles mixing drinks. */
 export class MixingJob implements Job {
 
   /** The drink being mixed by the job. */
-  drink: Drink
+  public drink: Drink
 
   /** The steps the job is handling. */
-  steps: Array<MixingStep>
+  public steps: MixingStep[]
 
   constructor(drink: Drink) {
     this.steps = drink.steps
   }
 
-  /** The step the job is currently working on. **/
-  getCurrentStep() {
+  /** The step the job is currently working on. */
+  public getCurrentStep() {
     return this.steps[0]
   }
 
-  tick(io: IO) {
-    if(this.getCurrentStep().execute(io)) this.steps.shift()
+  public tick(io: IO) {
+    if (this.getCurrentStep().execute(io)) this.steps.shift()
   }
 
-  getProgress() {
+  public getProgress() {
     const totalSteps = this.drink.steps.length
     const doneSteps = totalSteps - this.steps.length
     const currentStepProgress = this.getCurrentStep().getProgress()
     return doneSteps / totalSteps + (currentStepProgress / totalSteps)
   }
 
-  getTitle() {
+  public getTitle() {
     return `Mixing ${this.drink.name} ...`
   }
 
-  getDescription() {
+  public getDescription() {
     return this.getCurrentStep().getDescription()
   }
 

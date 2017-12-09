@@ -1,6 +1,6 @@
-import path = require('path')
 import fs = require('fs-extra')
 import yaml = require('js-yaml')
+import path = require('path')
 
 import { Drink } from '../models/drink'
 import { Liquid } from '../models/liquid'
@@ -9,38 +9,38 @@ import { PouringStep } from '../models/pouring-step'
 
 export class ConfigLoader {
 
-  constructor(private path: string) {
-    if(!fs.pathExistsSync(path)) {
+  constructor(private directory: string) {
+    if (!fs.pathExistsSync(directory)) {
       this.generateExamples()
     }
   }
 
   /** Generates default config files. */
-  async generateExamples() {
+  public async generateExamples() {
     try {
-      fs.mkdirSync(this.path)
+      fs.mkdirSync(this.directory)
 
-      const liquidsPath = path.join(this.path, 'liquids')
+      const liquidsPath = path.join(this.directory, 'liquids')
       fs.mkdirSync(liquidsPath)
 
-      const drinksPath = path.join(this.path, 'drinks')
+      const drinksPath = path.join(this.directory, 'drinks')
       fs.mkdirSync(drinksPath)
 
       const water = {
         name: 'Water',
-        density: 1
+        density: 1,
       }
       fs.writeFileSync(path.join(liquidsPath, 'water.yml'), yaml.dump(water))
 
       const deluxeWater = {
         name: 'Deluxe Water',
-        description: "Deluxe water, for the cool kids.",
+        description: 'Deluxe water, for the cool kids.',
         color: '#42A5F5',
         steps: [{
           type: 'pour',
           liquid: 'water',
-          amount: 300
-        }]
+          amount: 300,
+        }],
       }
       fs.writeFileSync(path.join(drinksPath, 'deluxe-water.yml'), yaml.dump(deluxeWater))
 
@@ -51,24 +51,24 @@ export class ConfigLoader {
         steps: [{
           type: 'pour',
           liquid: 'water',
-          amount: 299
-        }]
+          amount: 299,
+        }],
       }
       fs.writeFileSync(path.join(drinksPath, 'boring-water.yml'), yaml.dump(boringWater))
 
       console.log('Default configuration files were successfully generated!')
-    } catch(error) {
+    } catch (error) {
       console.log('There was an error generating the default configuration files.', error)
     }
   }
 
   /** Asynchronously loads the drinks from the `/drinks` directory. */
-  async loadDrinks(): Promise<Array<Drink>> {
-    const drinks: Array<Drink> = []
+  public async loadDrinks(): Promise<Drink[]> {
+    const drinks: Drink[] = []
 
-    const drinksPath = path.join(this.path, 'drinks')
+    const drinksPath = path.join(this.directory, 'drinks')
     const fileNames = await fs.readdir(drinksPath)
-    for(let fileName of fileNames) {
+    for (const fileName of fileNames) {
       const filePath = path.join(drinksPath, fileName)
       const fileContents = await fs.readFile(filePath, 'utf-8')
 
@@ -85,8 +85,8 @@ export class ConfigLoader {
   }
 
   /** Asynchronously parses a mixing step from an object. */
-  async parseMixingStep(object: any): Promise<MixingStep> {
-    switch(object.type) {
+  public async parseMixingStep(object: any): Promise<MixingStep> {
+    switch (object.type) {
       case 'pour':
         return new PouringStep(await this.loadLiquid(object.liquid),
                                object.amount)
@@ -94,8 +94,8 @@ export class ConfigLoader {
   }
 
   /** Asynchronously loads a liquid with a give file name. */
-  async loadLiquid(id: string): Promise<Liquid> {
-    const liquidsPath = path.join(this.path, 'liquids')
+  public async loadLiquid(id: string): Promise<Liquid> {
+    const liquidsPath = path.join(this.directory, 'liquids')
     const filePath = path.join(liquidsPath, id + '.yml')
     const fileContents = await fs.readFile(filePath, 'utf-8')
 

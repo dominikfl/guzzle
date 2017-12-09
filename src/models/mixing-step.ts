@@ -9,6 +9,6 @@ export interface MixingStep {
   getProgress(): number
 
   /** Executes the mixing step and returns whether it's done. */
-  execute(io: IO): boolean
+  execute(io: IO): Promise<boolean>
 
 }

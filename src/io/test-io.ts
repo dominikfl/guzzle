@@ -1,9 +1,15 @@
-import { ipcMain, BrowserWindow } from 'electron'
-import { promisify } from 'util'
+import { BrowserWindow, ipcMain } from 'electron'
 import * as path from 'path'
+import { promisify } from 'util'
 import { IO } from './io'
 
 export class TestIO implements IO {
+
+  /** The "Testing Utility" window. */
+  public window
+
+  /** The currently opened valves. */
+  private openValves: Set<number> = new Set()
 
   constructor() {
     this.window = new BrowserWindow({
@@ -11,7 +17,7 @@ export class TestIO implements IO {
       height: 500,
       resizable: false,
       show: false,
-      backgroundColor: '#fff'
+      backgroundColor: '#fff',
     })
 
     this.window.once('ready-to-show', () => this.window.show())
@@ -23,29 +29,23 @@ export class TestIO implements IO {
     })
   }
 
-  /** The "Testing Utility" window. */
-  window
-
-  /** The currently opened valves. */
-  openValves: Set<number> = new Set()
-
-  getScaleWeight(): Promise<number> {
+  public getScaleWeight(): Promise<number> {
     this.window.webContents.send('request-scale-value')
     return new Promise(resolve => {
       ipcMain.once('respond-with-scale-value', (event, arg) => resolve(arg))
     })
   }
 
-  async setValveOpen(id: number, open: boolean) {
+  public async setValveOpen(id: number, open: boolean) {
     open ? this.openValves.add(id) : this.openValves.delete(id)
     this.window.webContents.send('update-valve', { id, open })
   }
 
-  async isValveOpen(id: number) {
+  public async isValveOpen(id: number) {
     return this.openValves.has(id)
   }
 
-  async setLedColor(red: number, green: number, blue: number) {
+  public async setLedColor(red: number, green: number, blue: number) {
     console.log(`Set status LED color to (${red}, ${green}, ${blue}).`)
   }
 

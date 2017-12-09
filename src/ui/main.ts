@@ -1,6 +1,6 @@
-import * as Vue from 'vue/dist/vue.common'
 import os = require('os')
 import path = require('path')
+import * as Vue from 'vue/dist/vue.common'
 
 import { ConfigLoader } from '../config/config-loader'
 import { Drink } from '../models/drink'
@@ -10,7 +10,7 @@ const app = new Vue({
   data: {
     view: 'drink',
     drinks: [new Drink('Placeholder', 'If you see this drink, something went wrong.', '#FF1744', [])],
-    currentDrinkId: 0
+    currentDrinkId: 0,
   },
   computed: {
     backButtonHidden() {
@@ -20,12 +20,12 @@ const app = new Vue({
       return this.view === 'home'
     },
     themeColor() {
-      if(this.view === 'drink') return this.currentDrink.color
+      if (this.view === 'drink') return this.currentDrink.color
       return '#76c455'
     },
     currentDrink() {
       return this.drinks[this.currentDrinkId]
-    }
+    },
   },
   methods: {
     goBack() {
@@ -33,10 +33,10 @@ const app = new Vue({
     },
     exit() {
       this.view = 'home'
-    }
+    },
   },
   mounted() {
     const configLoader = new ConfigLoader(path.join(os.homedir(), '.guzzle'))
     configLoader.loadDrinks().then(drinks => this.drinks = drinks)
-  }
+  },
 })
