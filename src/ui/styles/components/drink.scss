@@ -1,31 +1,31 @@
 .drink {
-  text-align: center;
   display: flex;
   flex-direction: column;
   height: 100%;
+  text-align: center;
 
   > .scroller {
     flex-grow: 1;
 
     > .scroller-content {
-      padding-top: 100px;
       padding-bottom: 25px;
+      padding-top: 100px;
     }
   }
 
   &-image {
-    z-index: 1;
     position: relative;
+    z-index: 1;
 
     &-shadow {
-      width: 150px;
-      height: 20px;
-      background: rgba(black, .3);
-      filter: blur(15px);
+      background: rgba(#000, .3);
       border-radius: 50%;
+      filter: blur(15px);
+      height: 20px;
       margin: auto;
-      margin-top: -26px;
       margin-bottom: 50px;
+      margin-top: -26px;
+      width: 150px;
       z-index: 0;
     }
   }
@@ -35,7 +35,7 @@
   }
 
   &-description {
-    color: rgba(black, .4);
+    color: rgba(#000, .4);
     font-family: Chivo;
     font-size: 16px;
     padding: 0 80px;

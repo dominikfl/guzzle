@@ -1,33 +1,30 @@
 .round-button {
   $size: 50px;
-  height: $size;
-  width: $size;
-
   display: flex;
-  position: relative;
+  height: $size;
   overflow: visible;
+  position: relative;
+  width: $size;
 
   * {
     transition: .2s ease;
   }
 
   &-shape {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-
-    border-radius: 50%;
     background-color: var(--theme-color);
+    border-radius: 50%;
+    height: 100%;
     opacity: .2;
+    position: absolute;
+    width: 100%;
   }
 
   > svg {
     $size: 25px;
     height: $size;
-    width: $size;
     margin: auto;
-
     opacity: .5;
+    width: $size;
 
     path {
       stroke: var(--theme-color);

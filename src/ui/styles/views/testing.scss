@@ -1,8 +1,8 @@
 .testing-window {
   $color-border: #909090;
-  $color-background: #F5F5F5;
-  $color-input: #FFFFFF;
-  $color-text: #465A5B;
+  $color-background: #f5f5f5;
+  $color-input: #fff;
+  $color-text: #465a5b;
   $color-icon: #949494;
 
   $color-off: #e05656;
@@ -11,24 +11,24 @@
   $color-on-border: #17ab1d;
 
   background: $color-background;
-  padding: 15px;
   overflow-y: auto;
+  padding: 15px;
 
   .options {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
     grid-gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
     margin-bottom: 10px;
   }
 
   .option {
-    background: #FFF;
-    text-align: center;
-    box-shadow: 0 1px 1px rgba($color-icon, .3);
+    background: #fff;
     border: 1px solid $color-border;
     border-radius: 3px;
+    box-shadow: 0 1px 1px rgba($color-icon, .3);
     overflow: hidden;
     padding: 10px;
+    text-align: center;
 
     &-icon {
       color: $color-icon;
@@ -37,18 +37,18 @@
     }
 
     &-label {
-      color: #fff;
       background: $color-icon;
+      border-radius: 2px;
+      color: #fff;
       font-size: 13px;
       padding: 1px 3px;
-      border-radius: 2px;
     }
 
     &-control {
-      margin-top: 15px;
-      font-size: 12px;
       border: 1px solid $color-border;
       border-radius: 3px;
+      font-size: 12px;
+      margin-top: 15px;
       overflow: hidden;
     }
   }
@@ -57,35 +57,36 @@
     display: flex;
 
     &-value {
-      display: block;
-      border: none;
-      width: 0;
-      flex-grow: 1;
       background: $color-input;
-      padding: 4px 6px;
-      font-size: inherit;
+      border: 0;
       color: $color-text;
+      display: block;
+      flex-grow: 1;
+      font-size: inherit;
+      padding: 4px 6px;
+      width: 0;
 
-      &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
       }
     }
 
     &-unit {
-      color: $color-text;
       background: $color-background;
-      padding: 0 6px;
-      line-height: 19px;
       border-left: 1px solid $color-border;
+      color: $color-text;
+      line-height: 19px;
+      padding: 0 6px;
     }
   }
 
   .valve-control {
-    padding: 4px;
-    color: #fff;
     background: $color-off;
     border-color: $color-off-border;
+    color: #fff;
+    padding: 4px;
 
     &-open {
       background: $color-on;
@@ -94,17 +95,17 @@
   }
 
   .open-devtools {
+    border-bottom: 1px solid rgba($color-text, .5);
+    color: $color-text;
     cursor: pointer;
     display: inline-block;
     font-size: 12px;
-    color: $color-text;
-    border-bottom: 1px solid rgba($color-text, .5);
 
-    transition: all .2s ease-in-out;
+    transition: opacity, border-bottom-color .2s ease-in-out;
 
     &:not(:hover) {
-      opacity: .7;
       border-bottom-color: rgba($color-text, .2);
+      opacity: .7;
     }
 
     &:active {

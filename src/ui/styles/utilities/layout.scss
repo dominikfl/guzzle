@@ -1,12 +1,14 @@
-.fixed-top, .fixed-bottom, .fixed-fill {
-  position: fixed;
+.fixed-top,
+.fixed-bottom,
+.fixed-fill {
   left: 0;
+  position: fixed;
   right: 0;
 }
 
 .fixed-fill {
-  top: 0;
   bottom: 0;
+  top: 0;
 }
 
 .fixed-top {

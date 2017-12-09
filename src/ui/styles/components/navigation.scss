@@ -1,8 +1,7 @@
 .navigation {
-  z-index: 1000;
-  padding: 25px;
-
   display: flex;
+  padding: 25px;
+  z-index: 1000;
 
   &-filler {
     flex-grow: 1;

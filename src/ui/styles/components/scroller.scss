@@ -1,9 +1,13 @@
 .scroller {
   position: relative;
 
-  &-content, &-overlay {
+  &-content,
+  &-overlay {
+    bottom: 0;
+    left: 0;
     position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
+    right: 0;
+    top: 0;
   }
 
   &-content {
@@ -15,7 +19,7 @@
   }
 
   &-overlay {
-    background: linear-gradient(to bottom, white 0%, transparent 15%, transparent 85%, white 100%);
+    background: linear-gradient(to bottom, #fff 0%, transparent 15%, transparent 85%, #fff 100%);
     pointer-events: none;
   }
 }

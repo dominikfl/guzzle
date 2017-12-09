@@ -1,12 +1,15 @@
 .view {
+  bottom: 0;
+  left: 0;
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-
+  right: 0;
+  top: 0;
   transition: .2s ease;
+
   &.hidden {
+    filter: blur(5px);
     opacity: 0;
     pointer-events: none;
     transform: scale(.9);
-    filter: blur(5px);
   }
 }
