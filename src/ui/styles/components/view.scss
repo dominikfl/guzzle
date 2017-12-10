@@ -6,10 +6,23 @@
   top: 0;
   transition: .2s ease;
 
-  &.hidden {
+  @mixin hide {
     filter: blur(5px);
     opacity: 0;
     pointer-events: none;
-    transform: scale(.9);
+    transform-origin: center;
+  }
+
+  $hide-translation: 30px;
+  $hide-scale: .99;
+
+  &.hidden-left {
+    @include hide;
+    transform: scale($hide-scale) translateX(-$hide-translation);
+  }
+
+  &.hidden-right {
+    @include hide;
+    transform: scale($hide-scale) translateX($hide-translation);
   }
 }
