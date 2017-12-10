@@ -34,7 +34,7 @@ export default class Machine {
 
     this.window.once('ready-to-show', () => this.window.show())
     this.window.setMenu(null)
-    this.window.loadURL(path.join('file://', __dirname, 'ui/main.html'))
+    this.window.loadURL(path.join('file://', __dirname, 'ui/screen.html'))
 
     this.window.on('closed', () => app.quit())
 
