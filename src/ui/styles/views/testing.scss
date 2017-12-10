@@ -100,8 +100,7 @@
     cursor: pointer;
     display: inline-block;
     font-size: 12px;
-
-    transition: opacity, border-bottom-color .2s ease-in-out;
+    transition: border-bottom-color .2s ease-in-out, opacity .2s ease-in-out;
 
     &:not(:hover) {
       border-bottom-color: rgba($color-text, .2);
