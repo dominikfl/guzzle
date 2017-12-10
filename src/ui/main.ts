@@ -8,7 +8,7 @@ import { Drink } from '../models/drink'
 const app = new Vue({
   el: '#app',
   data: {
-    view: 'drink',
+    view: 'home',
     drinks: [new Drink('Placeholder', 'If you see this drink, something went wrong.', '#FF1744', [])],
     currentDrinkId: 0,
   },
