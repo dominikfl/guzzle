@@ -5,7 +5,7 @@ html
     link(rel='stylesheet', href='styles.css')
   body
     #app(
-        :style='{ "--theme-color": themeColor, background: view == "home" ? "#FBFBFB" : "white" }'
+        :style='{ "--theme-color": themeColor }'
     )
       .navigation.fixed-top(:class="{ disabled: backButtonHidden && exitButtonHidden }")
         .round-button(
