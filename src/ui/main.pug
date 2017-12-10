@@ -22,18 +22,18 @@ html
           .round-button-shape
           include icons/navigation-exit.svg
       .view-container.fixed-fill
-        .view.home-view(:class='{ hidden: view !== "home" }')
+        .view.home-view(:class='{ hidden: step !== 0 }')
           .scroller
             .scroller-content
               .drink-card(
                 v-for='drink, drinkId in drinks',
-                @click='currentDrinkId = drinkId; view = "drink"'
+                @click='currentDrinkId = drinkId; step = 1'
               )
                 .drink-card-stripe(:style='{ backgroundColor: drink.color }')
                 .drink-card-meta
                   .drink-card-name {{ drink.name }}
                   .drink-card-description {{ drink.description }}
-        .view(:class='{ hidden: view !== "drink" }')
+        .view(:class='{ hidden: step === 0 }')
           .drink
             .scroller
               .scroller-overlay

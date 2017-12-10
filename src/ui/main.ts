@@ -8,19 +8,19 @@ import { Drink } from '../models/drink'
 const app = new Vue({
   el: '#app',
   data: {
-    view: 'home',
+    step: 0,
     drinks: [new Drink('Placeholder', 'If you see this drink, something went wrong.', '#FF1744', [])],
     currentDrinkId: 0,
   },
   computed: {
     backButtonHidden() {
-      return this.view !== 'drink'
+      return this.step < 1
     },
     exitButtonHidden() {
-      return this.view === 'home'
+      return this.step <= 1
     },
     themeColor() {
-      if (this.view === 'drink') return this.currentDrink.color
+      if (this.step > 0) return this.currentDrink.color
       return '#76c455'
     },
     currentDrink() {
@@ -29,10 +29,10 @@ const app = new Vue({
   },
   methods: {
     goBack() {
-      this.view = 'home'
+      this.step = Math.max(this.step - 1, 0)
     },
     exit() {
-      this.view = 'home'
+      this.step = 0
     },
   },
   mounted() {
