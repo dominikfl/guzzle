@@ -1,16 +1,13 @@
 const gulp = require('gulp')
 const rename = require('gulp-rename')
-const typescript = require('gulp-typescript')
+const tsProject = require('gulp-typescript').createProject('tsconfig.json')
 const pug = require('gulp-pug')
 const sass = require('gulp-sass')
-
 gulp.task('default', ['typescript', 'pug', 'sass'])
 
 gulp.task('typescript', () => {
   return gulp.src('./src/**/*.ts')
-    .pipe(typescript({
-      noImplicitAny: true
-    }))
+    .pipe(tsProject()).js
     .pipe(gulp.dest('./dist'))
 })
 
