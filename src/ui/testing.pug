@@ -10,7 +10,7 @@ html
           span.component-icon.mdi.mdi-scale
           span.component-label Scale
           .scale-control.component-control
-            input.scale-control-value(type='number', min=0, v-model.number='inputs.scaleValue')
+            input.scale-control-value(type='number', min=0, v-model.number='inputs.scaleWeight')
             .scale-control-unit g
         .component(v-for='(valve, valveId) in outputs.valves')
           span.component-icon.mdi.mdi-water

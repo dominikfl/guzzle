@@ -11,6 +11,9 @@ export class TestIO implements IO {
   /** The currently opened valves. */
   private openValves: Set<number> = new Set()
 
+  /** The current scale weight. */
+  private scaleWeight: number
+
   constructor() {
     this.window = new BrowserWindow({
       width: 350,
@@ -27,13 +30,15 @@ export class TestIO implements IO {
     this.window.on('closed', () => {
       this.window = null
     })
+
+    ipcMain.on('update-scale-weight', (event, scaleWeight) => {
+      this.scaleWeight = scaleWeight
+      console.log(scaleWeight)
+    })
   }
 
-  public getScaleWeight(): Promise<number> {
-    this.window.webContents.send('request-scale-value')
-    return new Promise(resolve => {
-      ipcMain.once('respond-with-scale-value', (event, arg) => resolve(arg))
-    })
+  public async getScaleWeight(): Promise<number> {
+    return this.scaleWeight
   }
 
   public async setValveOpen(id: number, open: boolean) {

@@ -5,7 +5,7 @@ const app = new Vue({
   el: '#app',
   data: {
     inputs: {
-      scaleValue: 0,
+      scaleWeight: 0,
     },
     outputs: {
       valves: [
@@ -18,6 +18,11 @@ const app = new Vue({
       ],
     },
   },
+  watch: {
+    'inputs.scaleWeight'(scaleWeight) {
+      ipcRenderer.send('update-scale-value', this.scaleWeight)
+    },
+  },
   methods: {
     openDevTools() {
       ipcRenderer.send('open-devtools')
@@ -26,7 +31,5 @@ const app = new Vue({
   mounted() {
     ipcRenderer.on('update-valve',
       (event, { id, open }) => this.outputs.valves[id].open = open)
-    ipcRenderer.on('request-scale-value',
-      (event, arg) => event.sender.send('respond-with-scale-value', this.inputs.scaleValue))
   },
 })
