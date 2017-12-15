@@ -4,32 +4,38 @@ import * as Vue from 'vue/dist/vue.common'
 const app = new Vue({
   el: '#app',
   data: {
-    inputs: {
-      scaleWeight: 0,
-    },
-    outputs: {
-      valves: [
-        {
-          open: true,
+    components: {
+      scale: {
+        icon: 'scale',
+        name: 'Scale',
+        value: 0,
+        input: {
+          type: 'numeric',
+          min: 0,
+          suffix: ' g',
         },
-        {
-          open: false,
-        },
-      ],
-    },
-  },
-  watch: {
-    'inputs.scaleWeight'(scaleWeight) {
-      ipcRenderer.send('update-scale-value', this.scaleWeight)
+      },
+      valve0: {
+        icon: 'water',
+        name: 'Valve 1',
+        value: 'Closed',
+      },
+      valve1: {
+        icon: 'water',
+        name: 'Valve 2',
+        value: 'Closed',
+      },
     },
   },
   methods: {
     openDevTools() {
       ipcRenderer.send('open-devtools')
     },
+    update(reference) {
+      ipcRenderer.send('update-input-value', { reference, value: this.components[reference].value })
+    },
   },
   mounted() {
-    ipcRenderer.on('update-valve',
-      (event, { id, open }) => this.outputs.valves[id].open = open)
+    ipcRenderer.on('update-output-value', (event, { reference, value }) => this.components[reference].value = value)
   },
 })

@@ -6,16 +6,20 @@ html
   body
     #app.testing-window
       .components
-        .component
-          span.component-icon.mdi.mdi-scale
-          span.component-label Scale
-          .scale-control.component-control
-            input.scale-control-value(type='number', min=0, v-model.number='inputs.scaleWeight')
-            .scale-control-unit g
-        .component(v-for='(valve, valveId) in outputs.valves')
-          span.component-icon.mdi.mdi-water
-          span.component-label Valve {{ valveId }}
-          .valve-control.component-control(:class='{ "valve-control-open": valve.open }') {{ valve.open ? 'Open' : 'Closed' }}
+        .component(v-for='(component, componentReference) in components')
+          .component-icon.mdi(:class='"mdi-"+component.icon')
+          .component-meta
+            .component-title {{ component.name }}
+            .component-description {{ component.input ? 'Input' : 'Output' }}
+          .component-cell
+            template(v-if='component.input')
+              .component-value(
+                tabindex=0,
+                v-if='component.input.type === "numeric"',
+                @keydown.up='component.value++; update(componentReference)',
+                @keydown.down='component.value--; update(componentReference)',
+              ) {{ component.value }}{{ component.input.suffix || '' }}
+            .component-value(v-else) {{ component.value }}
       span.open-devtools(@click='openDevTools()') Open DevTools
     script var exports = {};
     script(src='testing.js')

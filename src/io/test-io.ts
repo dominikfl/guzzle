@@ -31,9 +31,8 @@ export class TestIO implements IO {
       this.window = null
     })
 
-    ipcMain.on('update-scale-weight', (event, scaleWeight) => {
-      this.scaleWeight = scaleWeight
-      console.log(scaleWeight)
+    ipcMain.on('update-input-value',  (event, { reference, value }) => {
+      if (reference === 'scale') this.scaleWeight = value
     })
   }
 
@@ -43,7 +42,7 @@ export class TestIO implements IO {
 
   public async setValveOpen(id: number, open: boolean) {
     open ? this.openValves.add(id) : this.openValves.delete(id)
-    this.window.webContents.send('update-valve', { id, open })
+    this.setOutputValue('valve' + id, open ? 'Open' : 'Closed')
   }
 
   public async isValveOpen(id: number) {
@@ -52,6 +51,10 @@ export class TestIO implements IO {
 
   public async setLedColor(red: number, green: number, blue: number) {
     console.log(`Set status LED color to (${red}, ${green}, ${blue}).`)
+  }
+
+  private setOutputValue(reference, value) {
+    this.window.webContents.send('update-output-value', { reference, value })
   }
 
 }
