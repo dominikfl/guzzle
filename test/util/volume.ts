@@ -6,6 +6,9 @@ describe('The `parseFluidVolume()` function', () => {
   it('should return a number', () =>
   expect(parseFluidVolume('1')).to.be.a('number'))
 
+  it('should return the value unchanged if a number is passed in', () =>
+  expect(parseFluidVolume(1)).to.equal(1))
+
   it('should return the value unchanged if no unit is specified', () =>
   expect(parseFluidVolume('1')).to.equal(1))
 

@@ -10,10 +10,11 @@ const units = {
 }
 
 /** Parses a fluid volume with or without unit and returns it in milliliters. */
-export function parseFluidVolume(str: string) {
-  if (str === '') throw new Error('No fluid volume specified!')
+export function parseFluidVolume(input: string | number) {
+  if (typeof input === 'number') return input
+  if (input === '') throw new Error('No fluid volume specified!')
 
-  const matches = str.match(/^(\d*\.?\d+)([a-z]+)?$/)
+  const matches = input.match(/^(\d*\.?\d+)([a-z]+)?$/)
   if (!matches) throw new Error('Invalid format!')
   const parts = matches.slice(1)
 
