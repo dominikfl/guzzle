@@ -23,13 +23,13 @@ export class TestIO implements IO {
       backgroundColor: '#fff',
     })
 
-    this.window.once('ready-to-show', () => this.window.show())
+    this.window.once('ready-to-show', () => {
+      this.window.show()
+      this.registerComponents()
+    })
     this.window.setMenu(null)
     this.window.loadURL(path.join('file://', __dirname, '../ui/testing.html'))
-
-    this.window.on('closed', () => {
-      this.window = null
-    })
+    this.window.on('closed', () => this.window = null)
 
     ipcMain.on('update-input-value',  (event, { reference, value }) => {
       if (reference === 'scale') this.scaleWeight = value
@@ -53,8 +53,37 @@ export class TestIO implements IO {
     console.log(`Set status LED color to (${red}, ${green}, ${blue}).`)
   }
 
+  private registerComponents() {
+    this.registerComponent('scale', {
+      icon: 'scale',
+      name: 'Scale',
+      value: 0,
+      input: {
+        type: 'numeric',
+        min: 0,
+        suffix: ' g',
+      },
+    })
+
+    for (let id = 0; id < 2; id++) {
+      this.registerComponent('valve' + id, {
+        icon: 'water',
+        name: 'Valve 1',
+        value: 'Closed',
+      })
+    }
+  }
+
+  private registerComponent(reference, options) {
+    this.sendToWindow('register-component', { reference, options })
+  }
+
   private setOutputValue(reference, value) {
-    this.window.webContents.send('update-output-value', { reference, value })
+    this.sendToWindow('update-output-value', { reference, value })
+  }
+
+  private sendToWindow(channel, parameter) {
+    this.window.webContents.send(channel, parameter)
   }
 
 }
