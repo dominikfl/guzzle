@@ -2,6 +2,8 @@ import fs = require('fs-extra')
 import yaml = require('js-yaml')
 import path = require('path')
 
+import { parseFluidVolume } from '../util/volume'
+
 import { Drink } from '../models/drink'
 import { Liquid } from '../models/liquid'
 import { MixingStep } from '../models/mixing-step'
@@ -39,7 +41,7 @@ export class ConfigLoader {
         steps: [{
           type: 'pour',
           liquid: 'water',
-          amount: 300,
+          amount: '300ml',
         }],
       }
       fs.writeFileSync(path.join(drinksPath, 'deluxe-water.yml'), yaml.dump(deluxeWater))
@@ -51,7 +53,7 @@ export class ConfigLoader {
         steps: [{
           type: 'pour',
           liquid: 'water',
-          amount: 299,
+          amount: '299ml',
         }],
       }
       fs.writeFileSync(path.join(drinksPath, 'boring-water.yml'), yaml.dump(boringWater))
@@ -89,7 +91,7 @@ export class ConfigLoader {
     switch (object.type) {
       case 'pour':
         return new PouringStep(await this.loadLiquid(object.liquid),
-                               object.amount)
+                               parseFluidVolume(object.amount))
     }
   }
 

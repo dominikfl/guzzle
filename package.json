@@ -6,7 +6,7 @@
   "scripts": {
     "build": "gulp",
     "start": "electron dist/main.js",
-    "test": "ts-mocha test/**/*.ts",
+    "test": "ts-mocha test/**/*.ts --watch-extensions ts",
     "lint": "npm run lint-sass && npm run lint-ts",
     "lint-sass": "sass-lint -v",
     "lint-ts": "tslint --project ."
