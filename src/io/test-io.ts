@@ -12,7 +12,7 @@ export class TestIO implements IO {
   private openValves: Set<number> = new Set()
 
   /** The current scale weight. */
-  private scaleWeight: number
+  private scaleWeight: number = 0
 
   constructor() {
     this.window = new BrowserWindow({
@@ -68,7 +68,7 @@ export class TestIO implements IO {
     for (let id = 0; id < 2; id++) {
       this.registerComponent('valve' + id, {
         icon: 'water',
-        name: 'Valve 1',
+        name: 'Valve ' + id,
         value: 'Closed',
       })
     }

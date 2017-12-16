@@ -17,9 +17,10 @@ const app = new Vue({
   },
   mounted() {
     ipcRenderer.on('register-component', (event, { reference, options }) => {
-      this.components[reference] = options
-      this.$forceUpdate()
+      this.$set(this.components, reference, options)
     })
-    ipcRenderer.on('update-output-value', (event, { reference, value }) => this.components[reference].value = value)
+    ipcRenderer.on('update-output-value', (event, { reference, value }) => {
+      this.$set(this.components[reference], 'value', value)
+    })
   },
 })
