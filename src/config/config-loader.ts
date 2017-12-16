@@ -95,7 +95,7 @@ export class ConfigLoader {
     }
   }
 
-  /** Asynchronously loads a liquid with a give file name. */
+  /** Asynchronously loads a liquid with a given file name. */
   public async loadLiquid(id: string): Promise<Liquid> {
     const liquidsPath = path.join(this.directory, 'liquids')
     const filePath = path.join(liquidsPath, id + '.yml')
