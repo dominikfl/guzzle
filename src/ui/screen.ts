@@ -1,3 +1,4 @@
+import { ipcRenderer } from 'electron'
 import os = require('os')
 import path = require('path')
 import * as Vue from 'vue/dist/vue.common'
@@ -36,7 +37,6 @@ const app = new Vue({
     },
   },
   mounted() {
-    const configLoader = new ConfigLoader(path.join(os.homedir(), '.guzzle'))
-    configLoader.loadDrinks().then(drinks => this.drinks = drinks)
+    ipcRenderer.on('register-drinks', (event, drinks) =>  this.drinks = drinks)
   },
 })

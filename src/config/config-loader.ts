@@ -2,6 +2,7 @@ import fs = require('fs-extra')
 import yaml = require('js-yaml')
 import path = require('path')
 
+import { IOConfig } from '../config/io-config'
 import { parseFluidVolume } from '../util/volume'
 
 import { Drink } from '../models/drink'
@@ -20,19 +21,17 @@ export class ConfigLoader {
   /** Generates default config files. */
   public async generateExamples() {
     try {
-      fs.mkdirSync(this.directory)
-
       const liquidsPath = path.join(this.directory, 'liquids')
-      fs.mkdirSync(liquidsPath)
+      await fs.mkdirp(liquidsPath)
 
       const drinksPath = path.join(this.directory, 'drinks')
-      fs.mkdirSync(drinksPath)
+      await fs.mkdirp(drinksPath)
 
       const water = {
         name: 'Water',
         density: 1,
       }
-      fs.writeFileSync(path.join(liquidsPath, 'water.yml'), yaml.dump(water))
+      await fs.writeFile(path.join(liquidsPath, 'water.yml'), yaml.dump(water))
 
       const deluxeWater = {
         name: 'Deluxe Water',
@@ -44,7 +43,7 @@ export class ConfigLoader {
           amount: '300ml',
         }],
       }
-      fs.writeFileSync(path.join(drinksPath, 'deluxe-water.yml'), yaml.dump(deluxeWater))
+      await fs.writeFile(path.join(drinksPath, 'deluxe-water.yml'), yaml.dump(deluxeWater))
 
       const boringWater = {
         name: 'Boring Water',
@@ -56,7 +55,7 @@ export class ConfigLoader {
           amount: '299ml',
         }],
       }
-      fs.writeFileSync(path.join(drinksPath, 'boring-water.yml'), yaml.dump(boringWater))
+      await fs.writeFile(path.join(drinksPath, 'boring-water.yml'), yaml.dump(boringWater))
 
       console.log('Default configuration files were successfully generated!')
     } catch (error) {
@@ -65,9 +64,8 @@ export class ConfigLoader {
   }
 
   /** Asynchronously loads the drinks from the `/drinks` directory. */
-  public async loadDrinks(): Promise<Drink[]> {
-    const drinks: Drink[] = []
-
+  public async loadDrinks(): Promise<{ [id: string]: Drink }> {
+    const drinks = {}
     const drinksPath = path.join(this.directory, 'drinks')
     const fileNames = await fs.readdir(drinksPath)
     for (const fileName of fileNames) {
@@ -81,7 +79,7 @@ export class ConfigLoader {
                               object.description,
                               object.color,
                               steps)
-      drinks.push(drink)
+      drinks[fileName.replace('.yml', '')] = drink
     }
     return drinks
   }
@@ -102,7 +100,15 @@ export class ConfigLoader {
     const fileContents = await fs.readFile(filePath, 'utf-8')
 
     const object = yaml.load(fileContents)
-    return new Liquid(object.name, object.density)
+    return new Liquid(id, object.name, object.density)
+  }
+
+  /** Asynchronously loads the machine's IO config. */
+  public async loadIOConfig(): Promise<IOConfig> {
+    const ioConfigPath = path.join(this.directory, 'io.yml')
+    const ioConfigContents = await fs.readFile(ioConfigPath, 'utf-8')
+    const object = yaml.load(ioConfigContents)
+    return new IOConfig(object)
   }
 
 }

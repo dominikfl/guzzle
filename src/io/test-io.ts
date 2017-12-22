@@ -1,6 +1,7 @@
 import { BrowserWindow, ipcMain } from 'electron'
 import * as path from 'path'
 import { promisify } from 'util'
+import { IOConfig } from '../config/io-config'
 import { IO } from './io'
 
 export class TestIO implements IO {
@@ -14,25 +15,28 @@ export class TestIO implements IO {
   /** The current scale weight. */
   private scaleWeight: number = 0
 
-  constructor() {
-    this.window = new BrowserWindow({
-      width: 350,
-      height: 500,
-      resizable: false,
-      show: false,
-      backgroundColor: '#fff',
-    })
+  public setup(config) {
+    return new Promise<void>(resolve => {
+      this.window = new BrowserWindow({
+        width: 350,
+        height: 500,
+        resizable: false,
+        show: false,
+        backgroundColor: '#fff',
+      })
 
-    this.window.once('ready-to-show', () => {
-      this.window.show()
-      this.registerComponents()
-    })
-    this.window.setMenu(null)
-    this.window.loadURL(path.join('file://', __dirname, '../ui/testing.html'))
-    this.window.on('closed', () => this.window = null)
+      this.window.once('ready-to-show', () => {
+        this.window.show()
+        this.registerComponents(config)
+        resolve()
+      })
+      this.window.setMenu(null)
+      this.window.loadURL(path.join('file://', __dirname, '../ui/testing.html'))
+      this.window.on('closed', () => this.window = null)
 
-    ipcMain.on('update-input-value',  (event, { reference, value }) => {
-      if (reference === 'scale') this.scaleWeight = value
+      ipcMain.on('update-input-value',  (event, { reference, value }) => {
+        if (reference === 'scale') this.scaleWeight = value
+      })
     })
   }
 
@@ -53,7 +57,7 @@ export class TestIO implements IO {
     console.log(`Set status LED color to (${red}, ${green}, ${blue}).`)
   }
 
-  private registerComponents() {
+  private registerComponents(config: IOConfig) {
     this.registerComponent('scale', {
       icon: 'scale',
       name: 'Scale',
@@ -65,10 +69,11 @@ export class TestIO implements IO {
       },
     })
 
-    for (let id = 0; id < 2; id++) {
-      this.registerComponent('valve' + id, {
+    for (const valveId in config.valves) {
+      const valve = config.valves[valveId]
+      this.registerComponent('valve' + valveId, {
         icon: 'water',
-        name: 'Valve ' + id,
+        name: `Valve ${valveId} (${valve.liquid})`,
         value: 'Closed',
       })
     }

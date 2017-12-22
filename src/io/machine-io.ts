@@ -1,7 +1,7 @@
 import * as rpiGpio from 'rpi-gpio'
 import { promisify } from 'util'
 
-import { MachineConfig } from '../config/machine-config'
+import { IOConfig } from '../config/io-config'
 import { IO } from './io'
 
  /** Promisified version of rpi-gpio. */
@@ -14,9 +14,11 @@ const gpio = {
 
 export class MachineIO implements IO {
 
-  constructor(private config: MachineConfig) {}
+  private config: IOConfig
 
-  public async setup() {
+  public async setup(config: IOConfig) {
+    this.config = config
+
     // Remove all GPIO bindings
     await gpio.destroy()
 

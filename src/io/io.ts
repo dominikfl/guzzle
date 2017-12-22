@@ -1,4 +1,9 @@
+import { IOConfig } from '../config/io-config'
+
 export interface IO {
+
+  /** Prepares some stuff for the IO to work. */
+  setup(config: IOConfig): Promise<void>
 
   /** The current weight on the scale. */
   getScaleWeight(): Promise<number>
