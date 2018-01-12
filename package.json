@@ -6,7 +6,7 @@
   "scripts": {
     "build": "gulp",
     "start": "electron dist/main.js",
-    "test": "ts-mocha test/**/*.ts --watch-extensions ts",
+    "test": "mocha test/**/*.ts --require ts-node/register --watch-extensions ts",
     "lint": "npm run lint-sass && npm run lint-ts",
     "lint-sass": "sass-lint -v",
     "lint-ts": "tslint --project ."
@@ -45,7 +45,7 @@
     "gulp-typescript": "^3.2.2",
     "mocha": "^3.5.3",
     "sass-lint": "^1.12.1",
-    "ts-mocha": "^1.0.3",
+    "ts-node": "^4.1.0",
     "tslint": "^5.8.0",
     "typescript": "^2.5.3"
   }
